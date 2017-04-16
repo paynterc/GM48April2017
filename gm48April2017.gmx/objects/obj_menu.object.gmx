@@ -119,7 +119,7 @@ if(show){
         if(i==selected){
             draw_set_color(c_white);
         }else{
-            draw_set_color(c_black);
+            draw_set_color(c_gray);
         }
         draw_text( room_width/2, yy, string(buttons[i,0]) );
         yy += fnt_height + spacing;    

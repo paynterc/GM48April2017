@@ -105,6 +105,7 @@
   <shaders name="shaders"/>
   <fonts name="fonts">
     <font>fonts\fnt_menus</font>
+    <font>fonts\fnt_menus_sm</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_game_control</object>
@@ -123,6 +124,8 @@
     <object>objects\obj_wall</object>
     <objects name="_ui">
       <object>objects\obj_text_basic</object>
+      <object>objects\obj_title</object>
+      <object>objects\obj_instructions</object>
       <object>objects\obj_score</object>
       <object>objects\obj_menu</object>
       <object>objects\obj_menu_restart</object>
