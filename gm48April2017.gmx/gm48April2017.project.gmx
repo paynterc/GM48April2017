@@ -35,9 +35,6 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\scr_user_input.gml</script>
-    <script>scripts\scr_screen_shake.gml</script>
-    <script>scripts\scr_gradually_rotate.gml</script>
     <script>scripts\scr_option_save.gml</script>
     <script>scripts\scr_option_read.gml</script>
     <scripts name="_level">
@@ -82,7 +79,18 @@
     <scripts name="_powerup">
       <script>scripts\scr_lunchbox_explode.gml</script>
     </scripts>
+    <scripts name="_service">
+      <script>scripts\scr_script_parse.gml</script>
+      <script>scripts\scr_user_input.gml</script>
+      <script>scripts\scr_screen_shake.gml</script>
+      <script>scripts\scr_gradually_rotate.gml</script>
+    </scripts>
+    <scripts name="_game">
+      <script>scripts\scr_play.gml</script>
+      <script>scripts\scr_quit.gml</script>
+    </scripts>
   </scripts>
+  <shaders name="shaders"/>
   <fonts name="fonts">
     <font>fonts\fnt_menus</font>
   </fonts>
@@ -93,6 +101,7 @@
     <object>objects\obj_player</object>
     <object>objects\obj_player_dead</object>
     <object>objects\obj_diggable</object>
+    <object>objects\obj_faller</object>
     <object>objects\obj_dig_water</object>
     <object>objects\obj_scaffold</object>
     <object>objects\obj_lunchbox</object>
@@ -102,6 +111,8 @@
     <objects name="_ui">
       <object>objects\obj_text_basic</object>
       <object>objects\obj_score</object>
+      <object>objects\obj_menu</object>
+      <object>objects\obj_menu_restart</object>
     </objects>
     <objects name="_enemies">
       <object>objects\obj_enemy</object>
@@ -115,9 +126,10 @@
     <object>objects\obj_spawn_delay</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_lobby</room>
     <room>rooms\rm_1</room>
   </rooms>
-  <constants number="14">
+  <constants number="18">
     <constant name="SET_FOOD_ITEMS">3</constant>
     <constant name="INI_FILE">"diggit.ini"</constant>
     <constant name="INPUT_MV_DOWN">1</constant>
@@ -132,6 +144,10 @@
     <constant name="ST_DRILLMAN_MOVE">1</constant>
     <constant name="ST_DRILLMAN_DRILL">2</constant>
     <constant name="ST_DRILLMAN_RESET">3</constant>
+    <constant name="INPUT_MENU_OPTION_NEXT">0</constant>
+    <constant name="INPUT_MENU_OPTION_PREV">1</constant>
+    <constant name="INPUT_MENU_OPTION_SELECT">2</constant>
+    <constant name="INPUT_ESCAPE">3</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
