@@ -25,31 +25,19 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Init
-sr_drillman = 5;
-max_drillman = 4;
-alarm[0]=room_speed * sr_drillman;
+            <string>/// Init
+dir = choose(1,-1);
+movespeed = 8;
+var gravmod = irandom(3);
+vsp = global.grav * gravmod * -1;
 
-/***
-sr_drill = 5;// Drill spawn rate
-max_drill = 5;
-alarm[0]=room_speed * sr_drill;
-***/
-
-sr_wander = 5;// Seeker spawn rate
-max_wander = 5;
-alarm[1]=room_speed  * sr_wander;
-
-
-sr_lunch = 10;// Lunch spawn rate
-max_lunch = 3;
-alarm[2]=room_speed  * sr_lunch;
+sprite_index = choose(spr_apple,spr_cheese,spr_banana);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="2" enumb="2">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -66,58 +54,41 @@ alarm[2]=room_speed  * sr_lunch;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>scr_spawn_drop(obj_lunchbox,max_lunch);
-alarm[2]=room_speed  * sr_lunch;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Spawn Wander
-scr_spawn_drop(obj_enemy_wander,max_wander);
-alarm[1]=room_speed  * sr_wander;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Spawn drillman
-scr_spawn_drop(obj_enemy_drillman,max_drillman);
-alarm[0]=room_speed * sr_drillman;
+            <string>/// Move
+
+hsp = dir * movespeed;
+vsp += sign(global.grav);
+
+
+//Horizontal Collision Check
+if (place_meeting(x+hsp,y,obj_wall))
+{
+    while(!place_meeting(x+sign(hsp),y,obj_wall))
+    {
+        x += sign(hsp);
+    }
+    hsp = 0;
+    movespeed--;   
+    dir *= -1;
+}
+
+//Vertical Collision Check
+if (place_meeting(x,y+vsp,obj_wall))
+{
+    while(!place_meeting(x,y+sign(vsp),obj_wall))
+    {
+        y += sign(vsp);
+    }
+    vsp = 0;
+
+}
+
+if(movespeed&lt;0){
+    movespeed = 0;
+}
+
+x += hsp;
+y += vsp;
 </string>
           </argument>
         </arguments>

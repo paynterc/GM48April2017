@@ -42,7 +42,35 @@
             <string>/// Init
 
 margin_l = room_width/8 + 8;
-
+hunger=100;
+thirst=100;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Update player vars
+if(instance_exists(obj_player)){
+    hunger = obj_player.hunger;
+    thirst = obj_player.thirst;
+}
 </string>
           </argument>
         </arguments>
@@ -69,16 +97,31 @@ margin_l = room_width/8 + 8;
 draw_set_font(fnt);
 draw_set_color(clr);
 draw_set_halign(fa_left);
-var yy=view_yview[0]+fnt_height;
-var xx = margin_l;
+var yy=view_yview[0] + view_hview[0] - fnt_height - spacing;
+var xx = view_xview[0]+fnt_height;
 
-draw_text(margin_l, yy, "SCORE: " + string(global.gamescore));
+// Score
+draw_text(xx, yy, "SCORE: " + string(global.gamescore));
+
+// Hunger bar
+xx += 320;
+draw_text(xx, yy, "HUNGER");
+var hpc = (hunger / 100) * 100;
+draw_healthbar(xx,yy,xx+128,yy-8,hpc,c_red,c_red,c_red,0,0,0);
+
+// Thirst bar
+xx += 256;
+draw_text(xx, yy, "THIRST");
+var tpc = (thirst / 100) * 100;
+draw_healthbar(xx,yy,xx+128,yy-8,tpc,c_blue,c_blue,c_blue,0,0,0);
 
 
-yy += fnt_height + spacing;
 if(debug_mode){
-  draw_text(margin_l, yy, instance_count);
+xx += 256;
+    draw_text(xx, yy, instance_count);
 } 
+
+
 </string>
           </argument>
         </arguments>
