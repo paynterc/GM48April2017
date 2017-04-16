@@ -4,7 +4,15 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_music_theme1</sound>
+    <sounds name="_effects">
+      <sound>sound\snd_effect_hit1</sound>
+      <sound>sound\snd_effect_good1</sound>
+      <sound>sound\snd_effect_good2</sound>
+      <sound>sound\snd_effect_dead1</sound>
+    </sounds>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_en_scorpion</sprite>
@@ -18,6 +26,7 @@
     <sprite>sprites\spr_rat</sprite>
     <sprite>sprites\spr_hamster_walk</sprite>
     <sprite>sprites\spr_rat_walk</sprite>
+    <sprite>sprites\spr_rat_up</sprite>
     <sprite>sprites\spr_rat_die</sprite>
     <sprite>sprites\spr_rat_dig</sprite>
     <sprite>sprites\spr_drillman</sprite>
@@ -90,13 +99,13 @@
       <script>scripts\scr_quit.gml</script>
     </scripts>
   </scripts>
-  <shaders name="shaders"/>
   <fonts name="fonts">
     <font>fonts\fnt_menus</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_game_control</object>
     <object>objects\obj_level_control</object>
+    <object>objects\obj_sound_control</object>
     <object>objects\obj_spawner</object>
     <object>objects\obj_player</object>
     <object>objects\obj_player_dead</object>

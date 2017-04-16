@@ -118,7 +118,7 @@ if(show){
     draw_set_halign(fa_center);
     for(var i = 0; i &lt; array_height_2d(buttons); i++){
         if(i==selected){
-            draw_set_color(c_white);
+            draw_set_color(c_lime);
         }else{
             draw_set_color(c_gray);
         }

@@ -58,6 +58,7 @@ room_xsquare_start
 room_ysquare_start
 
 **********/
+randomize();
 
 global.scale = 32;//Scale of individual diggable unit
 global.room_xunits = room_width/global.scale;
@@ -286,6 +287,7 @@ if(scr_user_input(INPUT_ESCAPE)){
           <argument>
             <kind>1</kind>
             <string>/// Player death. Start timer
+audio_play_sound(snd_effect_dead1,1,0);
 alarm[0]=room_speed * 3;
 </string>
           </argument>

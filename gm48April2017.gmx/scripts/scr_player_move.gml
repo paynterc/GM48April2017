@@ -4,7 +4,7 @@ key_left = -keyboard_check(vk_left);
 key_up = -keyboard_check(vk_up);
 key_down = keyboard_check(vk_down);
 key_jump = keyboard_check_pressed(vk_space);
-
+climbing=false;
 //React to inputs
 var move_h = key_left + key_right;
 var move_v = key_up + key_down;
@@ -13,6 +13,7 @@ hsp = move_h * movespeed;
 
 if( place_meeting(x+1,y,obj_wall) || place_meeting(x-1,y,obj_wall) ){    
     vsp = move_v * movespeed_v;
+    climbing=true;
 }
 
 
@@ -23,6 +24,7 @@ if(vsp<10)
 
 if(place_meeting(x,y+1,obj_wall))
 {
+    climbing=true;
     if (key_jump) vsp = -jumpspeed;
 }
 

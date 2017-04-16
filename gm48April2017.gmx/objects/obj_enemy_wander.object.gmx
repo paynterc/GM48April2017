@@ -145,7 +145,7 @@ if(place_meeting(x,y,obj_player))
         var prize = instance_create(x,y,obj_spawn_delay);
         prize.obj=obj_food;
         prize.delay=2;
-
+        audio_play_sound(snd_effect_hit1,2,0);
         instance_destroy();
         global.gamescore+=4;
     }

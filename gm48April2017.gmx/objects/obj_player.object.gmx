@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>/// Init
 state="still";
+climbing=false;
 movespeed = 6;
 movespeed_v = 8;
 jumpspeed = 16;
@@ -40,6 +41,8 @@ depth=-1000;
 my_sprite = sprite_index;
 my_sprite_walk = spr_rat_walk;
 my_sprite_dig = spr_rat_dig;
+my_sprite_walk_up = spr_rat_up;
+my_sprite_dig_up = spr_rat_up;
 
 diggable = noone;// The diggable i'm digging
 digrate = .25;
@@ -230,34 +233,68 @@ view_yview[0]=y-(view_hview[0]/2);
             <kind>1</kind>
             <string>/// Set animation
 if(state=="digging"){
+    
     sprite_index = my_sprite_dig;
-    if(dig_h&gt;0){
-        if(image_xscale&lt;0){
-            image_xscale *= -1;
+    
+    if(dig_v!=0){
+        
+
+        if(dig_v&gt;0){
+            
+            image_angle=270;
+
+        
+        }else if(dig_v&lt;0){
+            image_angle=90;
         }
     
-    }else if(dig_h&lt;0){
-        if(image_xscale&gt;0){
-            image_xscale *= -1;
+    }else{
+        image_angle=0;
+        if(dig_h&gt;0){
+            if(image_xscale&lt;0){
+                image_xscale *= -1;
+            }
+        
+        }else if(dig_h&lt;0){
+            if(image_xscale&gt;0){
+                image_xscale *= -1;
+            }
+        
         }
     
     }
 
 }else{
 
-    if(hsp&gt;0){
-        if(image_xscale&lt;0){
-            image_xscale *= -1;
-        }
-        sprite_index = my_sprite_walk;
-    }else if(hsp&lt;0){
-        if(image_xscale&gt;0){
-            image_xscale *= -1;
-        }
-        sprite_index = my_sprite_walk;
-    }else{
+    if(vsp!=0 &amp;&amp; climbing){
         
-        sprite_index = my_sprite;
+        sprite_index = my_sprite_walk;
+        
+
+        if(vsp&gt;0){
+            image_angle=270;
+        }else if(vsp&lt;0){
+            image_angle=90;
+        }
+
+        
+    }else{
+        image_angle=0;
+        if(hsp&gt;0){
+            if(image_xscale&lt;0){
+                image_xscale *= -1;
+            }
+            sprite_index = my_sprite_walk;
+        }else if(hsp&lt;0){
+            if(image_xscale&gt;0){
+                image_xscale *= -1;
+            }
+            sprite_index = my_sprite_walk;
+        }else{
+            
+            sprite_index = my_sprite;
+        }
+    
     }
 
 }
@@ -312,6 +349,7 @@ if(place_meeting(x,y,obj_enemy_deadly))
 scr_player_set_thirst(5);
 
 global.gamescore ++;
+audio_play_sound(snd_effect_good1,2,0);
 with(other){
     instance_destroy();
 }
@@ -343,6 +381,7 @@ if(hunger&gt;100){
     hunger=100;
 }
 global.gamescore ++;
+audio_play_sound(snd_effect_good1,2,0);
 with(other){
     instance_destroy();
 }
@@ -368,7 +407,8 @@ with(other){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with(other){
+            <string>audio_play_sound(snd_effect_good2,2,0);
+with(other){
     scr_lunchbox_explode();
 }
 </string>
@@ -394,6 +434,7 @@ with(other){
           <argument>
             <kind>1</kind>
             <string>scr_player_set_thirst(5);
+audio_play_sound(snd_effect_good1,2,0);
 with(other){
     instance_destroy();
 }
