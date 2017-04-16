@@ -55,6 +55,7 @@
     <instance objName="obj_score" x="96" y="32" name="inst_7E2A752F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_spawner" x="0" y="64" name="inst_55AB0AB1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_menu_restart" x="416" y="64" name="inst_7DE81952" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_lab_table" x="416" y="224" name="inst_F72AE59E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

@@ -111,11 +111,20 @@ scr_make_objects(0,0, global.room_xunits, 1, obj_scaffold);
 
 // Digg a starting hole
 hx1=room_width/2 - (global.scale * 2);
-hy1= global.scale*8;
+hy1= global.ymin;
 scr_dig_area(hx1,hy1,5,3);
 
+
+/***
+x = room_width/2;
+y= global.ymin - 160;
+***/
 // Position player
-instance_create(room_width/2,global.scale * 9,obj_player);
+
+var tbl = instance_create(room_width/2,global.ymin - 160,obj_lab_table);
+instance_create(tbl.x,tbl.y,obj_player);
+
+
 </string>
           </argument>
         </arguments>

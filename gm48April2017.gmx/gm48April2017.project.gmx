@@ -38,6 +38,7 @@
     <sprite>sprites\spr_cheese</sprite>
     <sprite>sprites\spr_water_bottle</sprite>
     <sprite>sprites\spr_prize</sprite>
+    <sprite>sprites\spr_wiz_labs</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_1</background>
@@ -141,6 +142,7 @@
     </objects>
     <object>objects\obj_spawn_delay</object>
     <object>objects\obj_efct_screenshake</object>
+    <object>objects\obj_lab_table</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_lobby</room>
