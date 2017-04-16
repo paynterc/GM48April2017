@@ -93,12 +93,14 @@
       <script>scripts\scr_user_input.gml</script>
       <script>scripts\scr_screen_shake.gml</script>
       <script>scripts\scr_gradually_rotate.gml</script>
+      <script>scripts\scr_flash.gml</script>
     </scripts>
     <scripts name="_game">
       <script>scripts\scr_play.gml</script>
       <script>scripts\scr_quit.gml</script>
     </scripts>
   </scripts>
+  <shaders name="shaders"/>
   <fonts name="fonts">
     <font>fonts\fnt_menus</font>
   </fonts>

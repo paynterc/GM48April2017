@@ -75,6 +75,8 @@ global.ymax = global.ymin + ((global.room_yunits * global.scale) * 3);// the bot
 global.ytrigger = global.ymax - trigger_height;//Triggers more diggables if player beyond this point
 
 global.gamescore = 0;
+
+drop_scaf_rate = 20;
 </string>
           </argument>
         </arguments>
@@ -113,6 +115,105 @@ scr_dig_area(hx1,hy1,5,3);
 
 // Position player
 instance_create(room_width/2,global.scale * 9,obj_player);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Run scaffold drop alarm
+alarm[1] = room_speed * drop_scaf_rate;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Dig area and drop scaffold
+
+with(obj_scaffold){
+    flashing=false;
+}
+var num_units = global.room_yunits / 2;
+
+scr_make_diggables(0,global.ymax, global.room_xunits, num_units);
+// Dig dirt and leave the walls
+scr_dig_area(0, global.ymin, global.room_xunits, num_units );
+
+// Remove the extra walls at top
+with(obj_wall){
+
+    if( y &lt; global.ymin -  global.room_yunits ){
+        instance_destroy();
+    }
+
+}
+
+
+
+global.ymin += num_units * global.scale;
+global.ymax += num_units * global.scale;
+
+global.ytrigger = global.ymax - trigger_height;
+           
+alarm[1] = room_speed * drop_scaf_rate;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Scaffold Drop warning
+with(obj_scaffold){
+    flashing=true;
+}
+alarm[2]= room_speed * 3;
 </string>
           </argument>
         </arguments>
@@ -191,10 +292,7 @@ if(instance_exists(obj_player)){
         global.ymax += num_units * global.scale;
     
         global.ytrigger = global.ymax - trigger_height;
-    
-    
-
-        
+           
         
     }
 }
