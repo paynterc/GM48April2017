@@ -1,29 +1,21 @@
-//Get player_move input
-key_right = keyboard_check(vk_right);//key_right = keyboard_check(ord("D"));
-key_left = -keyboard_check(vk_left);
-key_up = -keyboard_check(vk_up);
-key_down = keyboard_check(vk_down);
-key_jump = keyboard_check_pressed(vk_space);
+///Drill Down
 
-//React to inputs
-var move_h = key_left + key_right;
-var move_v = key_up + key_down;
+var move_h = 0;
+
+var move_v = 1;
 
 hsp = move_h * movespeed;
 
-if( place_meeting(x+1,y,obj_wall) || place_meeting(x-1,y,obj_wall) ){    
+if( place_meeting(x+1,y,obj_wall) || place_meeting(x-1,y,obj_wall) ){
+    
     vsp = move_v * movespeed_v;
+    
 }
 
 
 if(vsp<10)
 {
     vsp += grav;
-}
-
-if(place_meeting(x,y+1,obj_wall))
-{
-    if (key_jump) vsp = -jumpspeed;
 }
 
 
@@ -50,9 +42,9 @@ if (x + (sprite_width/2) + hsp >= global.border_r)
 }
 
 // Left boundry
-if (x + (sprite_width/2) + hsp <= global.border_l)
+if (x - (sprite_width/2) + hsp <= global.border_l)
 {
-    while(x + (sprite_width/2) > global.border_l)
+    while(x - (sprite_width/2) > global.border_l)
     {
         x += sign(hsp);
     }
@@ -75,6 +67,18 @@ if (place_meeting(x,y+vsp,obj_wall))
 
 
 
+
 y += vsp;
 
+diggable=noone;
+diggable = instance_place(x,y+1,obj_diggable);
+if(!instance_exists(diggable)){
+    diggable = noone;
+}
+
+
+
+if(y>drilldepth){
+    state = ST_DRILL_RETURNING;
+}
 

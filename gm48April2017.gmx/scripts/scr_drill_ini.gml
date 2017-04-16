@@ -1,0 +1,1 @@
+state = ST_DRILL_WAITING;

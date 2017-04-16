@@ -9,6 +9,18 @@
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_en_scorpion</sprite>
     <sprite>sprites\spr_diggable</sprite>
+    <sprite>sprites\spr_drillbit</sprite>
+    <sprite>sprites\spr_drillbit_sm</sprite>
+    <sprite>sprites\spr_seeker</sprite>
+    <sprite>sprites\spr_robaddy</sprite>
+    <sprite>sprites\spr_hamster</sprite>
+    <sprite>sprites\spr_rat</sprite>
+    <sprite>sprites\spr_hamster_walk</sprite>
+    <sprite>sprites\spr_rat_walk</sprite>
+    <sprite>sprites\spr_rat_dig</sprite>
+    <sprite>sprites\spr_drillman</sprite>
+    <sprite>sprites\spr_wall</sprite>
+    <sprite>sprites\spr_scaffold</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_1</background>
@@ -22,8 +34,11 @@
     <script>scripts\scr_option_read.gml</script>
     <scripts name="_level">
       <script>scripts\scr_make_diggables.gml</script>
+      <script>scripts\scr_make_objects.gml</script>
       <script>scripts\scr_dig_area.gml</script>
       <script>scripts\scr_draw_dig.gml</script>
+      <script>scripts\scr_player_death.gml</script>
+      <script>scripts\scr_spawn_drop.gml</script>
     </scripts>
     <scripts name="_arrays">
       <script>scripts\scr_array_concat.gml</script>
@@ -41,30 +56,63 @@
       <script>scripts\scr_player_move.gml</script>
       <script>scripts\scr_player_dig.gml</script>
     </scripts>
+    <scripts name="_enemy">
+      <scripts name="_drillman">
+        <script>scripts\scr_drillman_ini.gml</script>
+        <script>scripts\scr_drillman_move.gml</script>
+        <script>scripts\scr_drillman_drill.gml</script>
+        <script>scripts\scr_drillman_reset.gml</script>
+      </scripts>
+      <scripts name="_drill">
+        <script>scripts\scr_drill_ini.gml</script>
+        <script>scripts\scr_drill_wait.gml</script>
+        <script>scripts\scr_drill_drill.gml</script>
+        <script>scripts\scr_drill_return.gml</script>
+      </scripts>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_menus</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_game_control</object>
-    <object>objects\obj_player</object>
     <object>objects\obj_level_control</object>
+    <object>objects\obj_spawner</object>
+    <object>objects\obj_player</object>
     <object>objects\obj_diggable</object>
+    <object>objects\obj_scaffold</object>
     <object>objects\obj_wall</object>
     <objects name="_ui">
       <object>objects\obj_text_basic</object>
       <object>objects\obj_score</object>
     </objects>
+    <objects name="_enemies">
+      <object>objects\obj_enemy</object>
+      <object>objects\obj_enemy_deadly</object>
+      <object>objects\obj_drill</object>
+      <object>objects\obj_drill_auto</object>
+      <object>objects\obj_enemy_wander</object>
+      <object>objects\obj_enemy_scared</object>
+      <object>objects\obj_enemy_drillman</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_1</room>
   </rooms>
-  <constants number="5">
+  <constants number="13">
     <constant name="INI_FILE">"diggit.ini"</constant>
     <constant name="INPUT_MV_DOWN">1</constant>
     <constant name="INPUT_MV_UP">2</constant>
     <constant name="INPUT_MV_LEFT">3</constant>
     <constant name="INPUT_MV_RIGHT">4</constant>
+    <constant name="ST_DRILL_INIT">0</constant>
+    <constant name="ST_DRILL_WAITING">1</constant>
+    <constant name="ST_DRILL_DRILLING">2</constant>
+    <constant name="ST_DRILL_RETURNING">3</constant>
+    <constant name="ST_DRILLMAN_INIT">0</constant>
+    <constant name="ST_DRILLMAN_MOVE">1</constant>
+    <constant name="ST_DRILLMAN_DRILL">2</constant>
+    <constant name="ST_DRILLMAN_RESET">3</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>
