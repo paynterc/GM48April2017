@@ -67,6 +67,7 @@ global.grav=1;
 global.border_l = 0;
 global.border_r = room_width;
 
+
 trigger_height = global.scale*10;
 
 
@@ -76,7 +77,7 @@ global.ytrigger = global.ymax - trigger_height;//Triggers more diggables if play
 
 global.gamescore = 0;
 
-drop_scaf_rate = 20;
+drop_scaf_rate = 30;
 </string>
           </argument>
         </arguments>
@@ -185,6 +186,8 @@ global.ymin += num_units * global.scale;
 global.ymax += num_units * global.scale;
 
 global.ytrigger = global.ymax - trigger_height;
+
+scr_screen_shake();
            
 alarm[1] = room_speed * drop_scaf_rate;
 </string>

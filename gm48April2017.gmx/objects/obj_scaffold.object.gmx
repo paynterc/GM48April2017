@@ -83,12 +83,12 @@ alarm[0]= room_speed * flash_rate;
             <string>/// Move
 
 vsp += global.grav;
-///Vertical Collision Check
 
+// Vertical Collision Check
 var bb = y + sprite_height/2;
 var ylimit = global.ymin - global.scale;
 
-if ( bb + vsp &gt;=  ylimit)
+if (bb + vsp &gt;=  ylimit)
 {
     while(bb &lt; ylimit)
     {
@@ -99,17 +99,6 @@ if ( bb + vsp &gt;=  ylimit)
 
 }
 
-/****
-if (place_meeting(x,y+vsp,obj_scaffold))
-{
-    while(!place_meeting(x,y+sign(vsp),obj_scaffold))
-    {
-        y += sign(vsp);
-    }
-    vsp = 0;
-
-}
-***/
 
 y += vsp;
 </string>
