@@ -1,7 +1,7 @@
 /// Move
 
 hsp = dir * movespeed;
-vsp = grav;
+vsp += grav;
 
 //Horizontal Collision Check
 if (place_meeting(x+hsp,y,obj_scaffold))

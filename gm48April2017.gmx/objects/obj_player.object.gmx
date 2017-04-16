@@ -28,8 +28,8 @@
             <string>/// Init
 state="still";
 movespeed = 6;
-movespeed_v = 16;
-jumpspeed = 36;
+movespeed_v = 8;
+jumpspeed = 16;
 grav = global.grav;
 hsp=0;
 vsp=0;
@@ -42,14 +42,14 @@ my_sprite_walk = spr_rat_walk;
 my_sprite_dig = spr_rat_dig;
 
 diggable = noone;// The diggable i'm digging
-digrate = .5;
+digrate = .25;
 
 alarm[0]=room_speed * digrate;
 
 hunger=100;
 thirst=100;
-hunger_rate = 5;
-thirst_rate = 3;
+hunger_rate = 2;
+thirst_rate = 1;
 
 alarm[1]=room_speed * hunger_rate;
 alarm[2]=room_speed * thirst_rate;
@@ -291,6 +291,32 @@ if(place_meeting(x,y,obj_enemy_deadly))
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_dig_water">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>scr_player_set_thirst(5);
+with(other){
+    instance_destroy();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_water">
       <action>
         <libid>1</libid>
@@ -309,10 +335,8 @@ if(place_meeting(x,y,obj_enemy_deadly))
           <argument>
             <kind>1</kind>
             <string>/// Drink
-thirst+=5;
-if(thirst&gt;100){
-    thirst=100;
-}
+scr_player_set_thirst(5);
+
 global.gamescore ++;
 with(other){
     instance_destroy();

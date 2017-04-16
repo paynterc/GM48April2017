@@ -9,6 +9,7 @@
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_en_scorpion</sprite>
     <sprite>sprites\spr_diggable</sprite>
+    <sprite>sprites\spr_dig_water</sprite>
     <sprite>sprites\spr_drillbit</sprite>
     <sprite>sprites\spr_drillbit_sm</sprite>
     <sprite>sprites\spr_seeker</sprite>
@@ -17,6 +18,7 @@
     <sprite>sprites\spr_rat</sprite>
     <sprite>sprites\spr_hamster_walk</sprite>
     <sprite>sprites\spr_rat_walk</sprite>
+    <sprite>sprites\spr_rat_die</sprite>
     <sprite>sprites\spr_rat_dig</sprite>
     <sprite>sprites\spr_drillman</sprite>
     <sprite>sprites\spr_wall</sprite>
@@ -26,6 +28,7 @@
     <sprite>sprites\spr_banana</sprite>
     <sprite>sprites\spr_cheese</sprite>
     <sprite>sprites\spr_water_bottle</sprite>
+    <sprite>sprites\spr_prize</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_1</background>
@@ -60,6 +63,7 @@
     <scripts name="_player">
       <script>scripts\scr_player_move.gml</script>
       <script>scripts\scr_player_dig.gml</script>
+      <script>scripts\scr_player_set_thirst.gml</script>
     </scripts>
     <scripts name="_enemy">
       <scripts name="_drillman">
@@ -87,7 +91,9 @@
     <object>objects\obj_level_control</object>
     <object>objects\obj_spawner</object>
     <object>objects\obj_player</object>
+    <object>objects\obj_player_dead</object>
     <object>objects\obj_diggable</object>
+    <object>objects\obj_dig_water</object>
     <object>objects\obj_scaffold</object>
     <object>objects\obj_lunchbox</object>
     <object>objects\obj_food</object>
@@ -106,6 +112,7 @@
       <object>objects\obj_enemy_scared</object>
       <object>objects\obj_enemy_drillman</object>
     </objects>
+    <object>objects\obj_spawn_delay</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_1</room>

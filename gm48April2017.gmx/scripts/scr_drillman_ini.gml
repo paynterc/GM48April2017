@@ -1,5 +1,5 @@
 /// Fall then move
-vsp=global.grav;
+vsp+=global.grav;
 
 if (place_meeting(x,y+vsp,obj_scaffold))
 {

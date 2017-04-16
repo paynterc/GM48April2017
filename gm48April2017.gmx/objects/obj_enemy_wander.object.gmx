@@ -83,7 +83,7 @@ fearofheights = 0;
             <string>/// Move
 
 hsp = dir * movespeed;
-vsp = grav;
+vsp += grav;
 
 //Horizontal Collision Check
 if (place_meeting(x+hsp,y,obj_wall))
@@ -142,7 +142,12 @@ if(place_meeting(x,y,obj_player))
     if (obj_player.y&lt;y- (sprite_height/2) )
     {
         with(obj_player) vsp = -jumpspeed;
+        var prize = instance_create(x,y,obj_spawn_delay);
+        prize.obj=obj_food;
+        prize.delay=2;
+
         instance_destroy();
+        global.gamescore+=4;
     }
     else
     {

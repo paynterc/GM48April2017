@@ -57,7 +57,7 @@ sprite_index = choose(spr_apple,spr_cheese,spr_banana);
             <string>/// Move
 
 hsp = dir * movespeed;
-vsp += sign(global.grav);
+vsp += global.grav;
 
 
 //Horizontal Collision Check
