@@ -147,6 +147,7 @@
   <rooms name="rooms">
     <room>rooms\rm_lobby</room>
     <room>rooms\rm_1</room>
+    <room>rooms\room2</room>
   </rooms>
   <constants number="20">
     <constant name="SET_FOOD_ITEMS">3</constant>

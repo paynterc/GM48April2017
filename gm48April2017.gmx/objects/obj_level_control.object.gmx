@@ -422,6 +422,7 @@ alarm[0]=room_speed * 3;
           <argument>
             <kind>1</kind>
             <string>/// Draw lines
+/***
 if(debug_mode){
     draw_set_color(c_lime);
     draw_line(0,global.ymin,room_width,global.ymin);
@@ -437,6 +438,7 @@ if(debug_mode){
     draw_line(global.border_l,0,global.border_l,global.ymax);
     draw_line(global.border_r,0,global.border_r,global.ymax);
 }
+***/
 </string>
           </argument>
         </arguments>
