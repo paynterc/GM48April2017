@@ -60,24 +60,26 @@ room_ysquare_start
 **********/
 randomize();
 
+drop_scaf_rate = 30;
+
+
 global.scale = 32;//Scale of individual diggable unit
+trigger_height = global.scale*10;
+
 global.room_xunits = room_width/global.scale;
 global.room_yunits = 20;
 global.grav=1;
 global.border_l = 0;
 global.border_r = room_width;
-
-
-trigger_height = global.scale*10;
-
-
-global.ymin = global.scale*5;// the topmost level of diggables;
+global.ymin = global.scale*5;// y coord. the topmost level of diggables;
 global.ymax = global.ymin + ((global.room_yunits * global.scale) * 3);// the bottomost level of diggables;
 global.ytrigger = global.ymax - trigger_height;//Triggers more diggables if player beyond this point
 
 global.gamescore = 0;
+global.allow_lava = 0;
+global.drops=0;//number of scaffold drops
 
-drop_scaf_rate = 30;
+
 </string>
           </argument>
         </arguments>
@@ -98,7 +100,7 @@ drop_scaf_rate = 30;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Make diggables
+            <string>/// Make diggables and player
 scr_make_diggables(0,global.ymin,global.room_xunits,global.room_yunits * 3);
 
 // Create a scaffold;
@@ -123,6 +125,7 @@ y= global.ymin - 160;
 
 var tbl = instance_create(room_width/2,global.ymin - 160,obj_lab_table);
 instance_create(tbl.x,tbl.y,obj_player);
+instance_create(tbl.x,tbl.y,obj_view_follow);
 
 
 </string>
@@ -147,6 +150,29 @@ instance_create(tbl.x,tbl.y,obj_player);
             <kind>1</kind>
             <string>/// Run scaffold drop alarm
 alarm[1] = room_speed * drop_scaf_rate;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Add needed objects
+
+instance_create(0,0,obj_grid);
 </string>
           </argument>
         </arguments>
@@ -197,6 +223,10 @@ global.ymax += num_units * global.scale;
 global.ytrigger = global.ymax - trigger_height;
 
 scr_screen_shake();
+
+scr_place_croc();
+
+global.drops++;
            
 alarm[1] = room_speed * drop_scaf_rate;
 </string>
@@ -299,7 +329,7 @@ if(instance_exists(obj_player)){
         }
         
         
-        
+        global.drops++;
         global.ymin += num_units * global.scale;
         global.ymax += num_units * global.scale;
     
@@ -373,6 +403,31 @@ if(instance_exists(obj_player)){
             <string>/// User input
 if(scr_user_input(INPUT_ESCAPE)){
     room_goto(rm_lobby);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Check level status
+
+if(global.drops&gt;3){
+    global.allow_lava=1;
 }
 </string>
           </argument>

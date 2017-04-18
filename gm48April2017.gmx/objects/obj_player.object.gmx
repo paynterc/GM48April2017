@@ -28,8 +28,8 @@
             <string>/// Init
 state="still";
 climbing=false;
-movespeed = 6;
-movespeed_v = 8;
+movespeed = 16;
+movespeed_v = 16;
 jumpspeed = 16;
 grav = global.grav;
 hsp=0;
@@ -51,8 +51,8 @@ alarm[0]=room_speed * digrate;
 
 hunger=100;
 thirst=100;
-hunger_rate = 2;
-thirst_rate = 1;
+hunger_rate = 1;
+thirst_rate = .25;
 
 alarm[1]=room_speed * hunger_rate;
 alarm[2]=room_speed * thirst_rate;
@@ -208,9 +208,9 @@ scr_player_dig();
           <argument>
             <kind>1</kind>
             <string>/// Center view on player
-/// Center view on player
-view_xview[0]=x-(view_wview[0]/2);
-view_yview[0]=y-(view_hview[0]/2);
+
+//view_xview[0]=x-(view_wview[0]/2);
+//view_yview[0]=y-(view_hview[0]/2);
 </string>
           </argument>
         </arguments>
@@ -238,7 +238,7 @@ if(state=="digging"){
     
     if(dig_v!=0){
         
-
+        image_xscale = 1;
         if(dig_v&gt;0){
             
             image_angle=270;

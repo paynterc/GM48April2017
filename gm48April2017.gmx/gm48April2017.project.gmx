@@ -11,6 +11,7 @@
       <sound>sound\snd_effect_good1</sound>
       <sound>sound\snd_effect_good2</sound>
       <sound>sound\snd_effect_dead1</sound>
+      <sound>sound\snd_effect_explode1</sound>
     </sounds>
   </sounds>
   <sprites name="sprites">
@@ -39,6 +40,13 @@
     <sprite>sprites\spr_water_bottle</sprite>
     <sprite>sprites\spr_prize</sprite>
     <sprite>sprites\spr_wiz_labs</sprite>
+    <sprite>sprites\spr_hunter_trap</sprite>
+    <sprite>sprites\sprite27</sprite>
+    <sprite>sprites\spr_gator</sprite>
+    <sprite>sprites\spr_explode1</sprite>
+    <sprite>sprites\spr_lava</sprite>
+    <sprite>sprites\spr_lava_shoot</sprite>
+    <sprite>sprites\spr_rock</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_1</background>
@@ -54,6 +62,7 @@
       <script>scripts\scr_draw_dig.gml</script>
       <script>scripts\scr_player_death.gml</script>
       <script>scripts\scr_spawn_drop.gml</script>
+      <script>scripts\scr_place_croc.gml</script>
     </scripts>
     <scripts name="_arrays">
       <script>scripts\scr_array_concat.gml</script>
@@ -79,6 +88,8 @@
         <script>scripts\scr_drillman_drill.gml</script>
         <script>scripts\scr_drillman_reset.gml</script>
         <script>scripts\scr_drillman_warning.gml</script>
+        <script>scripts\scr_drillman_dead.gml</script>
+        <script>scripts\scr_kill_drillman.gml</script>
       </scripts>
       <scripts name="_drill">
         <script>scripts\scr_drill_ini.gml</script>
@@ -90,6 +101,17 @@
     </scripts>
     <scripts name="_powerup">
       <script>scripts\scr_lunchbox_explode.gml</script>
+      <scripts name="_lava">
+        <script>scripts\scr_lava_waiting.gml</script>
+        <script>scripts\scr_lava_warning.gml</script>
+        <script>scripts\scr_lava_explode.gml</script>
+        <script>scripts\scr_lava_dead.gml</script>
+      </scripts>
+      <scripts name="_rock">
+        <script>scripts\scr_rock_waiting.gml</script>
+        <script>scripts\scr_rock_warning.gml</script>
+        <script>scripts\scr_rock_fall.gml</script>
+      </scripts>
     </scripts>
     <scripts name="_service">
       <script>scripts\scr_script_parse.gml</script>
@@ -97,6 +119,8 @@
       <script>scripts\scr_screen_shake.gml</script>
       <script>scripts\scr_gradually_rotate.gml</script>
       <script>scripts\scr_flash.gml</script>
+      <script>scripts\scr_play_sound.gml</script>
+      <script>scripts\scr_view_follow.gml</script>
     </scripts>
     <scripts name="_game">
       <script>scripts\scr_play.gml</script>
@@ -113,11 +137,15 @@
     <object>objects\obj_level_control</object>
     <object>objects\obj_sound_control</object>
     <object>objects\obj_spawner</object>
+    <object>objects\obj_view_follow</object>
+    <object>objects\obj_grid</object>
     <object>objects\obj_player</object>
     <object>objects\obj_player_dead</object>
     <object>objects\obj_diggable</object>
     <object>objects\obj_faller</object>
     <object>objects\obj_dig_water</object>
+    <object>objects\obj_dig_lava</object>
+    <object>objects\obj_dig_rock</object>
     <object>objects\obj_scaffold</object>
     <object>objects\obj_lunchbox</object>
     <object>objects\obj_food</object>
@@ -137,19 +165,28 @@
       <object>objects\obj_drill</object>
       <object>objects\obj_drill_auto</object>
       <object>objects\obj_enemy_wander</object>
+      <object>objects\obj_enemy_hunter</object>
+      <object>objects\obj_enemy_trap</object>
       <object>objects\obj_enemy_scared</object>
       <object>objects\obj_enemy_drillman</object>
+      <object>objects\obj_enemy_croc</object>
+      <object>objects\obj_enemy_bomb</object>
+      <object>objects\obj_lava_ball</object>
     </objects>
     <object>objects\obj_spawn_delay</object>
     <object>objects\obj_efct_screenshake</object>
     <object>objects\obj_lab_table</object>
+    <object>objects\obj_explosion</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_lobby</room>
     <room>rooms\rm_1</room>
     <room>rooms\room2</room>
   </rooms>
-  <constants number="20">
+  <constants number="33">
+    <constant name="ST_ENEMY_INIT">0</constant>
+    <constant name="ST_ENEMY_MOVE">1</constant>
+    <constant name="ST_ENEMY_DEAD">2</constant>
     <constant name="SET_FOOD_ITEMS">3</constant>
     <constant name="INI_FILE">"diggit.ini"</constant>
     <constant name="INPUT_MV_DOWN">1</constant>
@@ -166,10 +203,20 @@
     <constant name="ST_DRILLMAN_DRILL">2</constant>
     <constant name="ST_DRILLMAN_RESET">3</constant>
     <constant name="ST_DRILLMAN_WARNING">4</constant>
+    <constant name="ST_DRILLMAN_DEAD">5</constant>
     <constant name="INPUT_MENU_OPTION_NEXT">0</constant>
     <constant name="INPUT_MENU_OPTION_PREV">1</constant>
     <constant name="INPUT_MENU_OPTION_SELECT">2</constant>
     <constant name="INPUT_ESCAPE">3</constant>
+    <constant name="ST_LAVA_INIT">0</constant>
+    <constant name="ST_LAVA_WAIT">1</constant>
+    <constant name="ST_LAVA_WARNING">2</constant>
+    <constant name="ST_LAVA_EXPLODE">3</constant>
+    <constant name="ST_LAVA_DEAD">4</constant>
+    <constant name="ST_ROCK_INIT">0</constant>
+    <constant name="ST_ROCK_WAIT">1</constant>
+    <constant name="ST_ROCK_WARNING">2</constant>
+    <constant name="ST_ROCK_FALL">3</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

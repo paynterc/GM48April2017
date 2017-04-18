@@ -11,7 +11,7 @@ var move_v = key_up + key_down;
 
 hsp = move_h * movespeed;
 
-if( place_meeting(x+1,y,obj_wall) || place_meeting(x-1,y,obj_wall) ){    
+if( place_meeting(x+1,y,obj_wall) || place_meeting(x-1,y,obj_wall) || place_meeting(x,y-global.scale,obj_wall)){    
     vsp = move_v * movespeed_v;
     climbing=true;
 }
