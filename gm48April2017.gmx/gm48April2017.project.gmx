@@ -18,7 +18,9 @@
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_en_scorpion</sprite>
     <sprite>sprites\spr_diggable</sprite>
+    <sprite>sprites\sprite34</sprite>
     <sprite>sprites\spr_dig_water</sprite>
+    <sprite>sprites\sprite37</sprite>
     <sprite>sprites\spr_drillbit</sprite>
     <sprite>sprites\spr_drillbit_sm</sprite>
     <sprite>sprites\spr_seeker</sprite>
@@ -47,22 +49,46 @@
     <sprite>sprites\spr_lava</sprite>
     <sprite>sprites\spr_lava_shoot</sprite>
     <sprite>sprites\spr_rock</sprite>
+    <sprite>sprites\spr_onyx</sprite>
+    <sprite>sprites\spr_cthulu</sprite>
+    <sprite>sprites\sprite39</sprite>
+    <sprite>sprites\spr_cthulu_ttcl</sprite>
+    <sprite>sprites\spr_gem</sprite>
+    <sprite>sprites\spr_gem_green</sprite>
+    <sprite>sprites\spr_gem_yellow</sprite>
+    <sprite>sprites\sprite38</sprite>
+    <sprite>sprites\spr_spider</sprite>
+    <sprite>sprites\sprite42</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_1</background>
   </backgrounds>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\pth_cth1</path>
+    <path>paths\pth_cth2</path>
+    <path>paths\pth_cth3</path>
+    <path>paths\pth_cth4</path>
+    <path>paths\pth_cth5</path>
+    <path>paths\pth_cth6</path>
+    <path>paths\pth_cth7</path>
+    <path>paths\pth_cth8</path>
+  </paths>
   <scripts name="scripts">
     <script>scripts\scr_option_save.gml</script>
     <script>scripts\scr_option_read.gml</script>
     <scripts name="_level">
       <script>scripts\scr_make_diggables.gml</script>
       <script>scripts\scr_make_objects.gml</script>
+      <script>scripts\scr_make_objects_grid.gml</script>
       <script>scripts\scr_dig_area.gml</script>
+      <script>scripts\scr_dig_grid.gml</script>
       <script>scripts\scr_draw_dig.gml</script>
       <script>scripts\scr_player_death.gml</script>
       <script>scripts\scr_spawn_drop.gml</script>
       <script>scripts\scr_place_croc.gml</script>
+      <script>scripts\scr_place_croc_gem.gml</script>
+      <script>scripts\scr_place_croc_gem_big.gml</script>
+      <script>scripts\scr_place_cthulu.gml</script>
     </scripts>
     <scripts name="_arrays">
       <script>scripts\scr_array_concat.gml</script>
@@ -79,6 +105,7 @@
     <scripts name="_player">
       <script>scripts\scr_player_move.gml</script>
       <script>scripts\scr_player_dig.gml</script>
+      <script>scripts\scr_player_dig_new.gml</script>
       <script>scripts\scr_player_set_thirst.gml</script>
     </scripts>
     <scripts name="_enemy">
@@ -98,8 +125,13 @@
         <script>scripts\scr_drill_return.gml</script>
         <script>scripts\scr_drill_warning.gml</script>
       </scripts>
+      <scripts name="_cthulu">
+        <script>scripts\scr_cthulu_wait.gml</script>
+        <script>scripts\scr_cthulu_warning.gml</script>
+        <script>scripts\scr_cthulu_tentacles.gml</script>
+      </scripts>
     </scripts>
-    <scripts name="_powerup">
+    <scripts name="_pickups">
       <script>scripts\scr_lunchbox_explode.gml</script>
       <scripts name="_lava">
         <script>scripts\scr_lava_waiting.gml</script>
@@ -112,6 +144,9 @@
         <script>scripts\scr_rock_warning.gml</script>
         <script>scripts\scr_rock_fall.gml</script>
       </scripts>
+      <script>scripts\scr_gem_green.gml</script>
+      <script>scripts\scr_gem_red.gml</script>
+      <script>scripts\scr_gem_yellow.gml</script>
     </scripts>
     <scripts name="_service">
       <script>scripts\scr_script_parse.gml</script>
@@ -127,7 +162,6 @@
       <script>scripts\scr_quit.gml</script>
     </scripts>
   </scripts>
-  <shaders name="shaders"/>
   <fonts name="fonts">
     <font>fonts\fnt_menus</font>
     <font>fonts\fnt_menus_sm</font>
@@ -153,6 +187,7 @@
     <object>objects\obj_wall</object>
     <objects name="_ui">
       <object>objects\obj_text_basic</object>
+      <object>objects\obj_text_view</object>
       <object>objects\obj_title</object>
       <object>objects\obj_instructions</object>
       <object>objects\obj_score</object>
@@ -172,18 +207,32 @@
       <object>objects\obj_enemy_croc</object>
       <object>objects\obj_enemy_bomb</object>
       <object>objects\obj_lava_ball</object>
+      <objects name="_cthulu">
+        <object>objects\obj_boss_cthulu</object>
+        <object>objects\obj_cthulu_ttcl</object>
+      </objects>
+      <object>objects\obj_enemy_spider</object>
     </objects>
     <object>objects\obj_spawn_delay</object>
     <object>objects\obj_efct_screenshake</object>
     <object>objects\obj_lab_table</object>
     <object>objects\obj_explosion</object>
+    <objects name="_pickup">
+      <object>objects\obj_pickup</object>
+      <object>objects\obj_gem</object>
+      <object>objects\obj_gem_green</object>
+      <object>objects\obj_gem_yellow</object>
+    </objects>
+    <object>objects\obj_dig_onyx</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_lobby</room>
     <room>rooms\rm_1</room>
     <room>rooms\room2</room>
+    <room>rooms\room4</room>
+    <room>rooms\room3</room>
   </rooms>
-  <constants number="33">
+  <constants number="36">
     <constant name="ST_ENEMY_INIT">0</constant>
     <constant name="ST_ENEMY_MOVE">1</constant>
     <constant name="ST_ENEMY_DEAD">2</constant>
@@ -217,6 +266,9 @@
     <constant name="ST_ROCK_WAIT">1</constant>
     <constant name="ST_ROCK_WARNING">2</constant>
     <constant name="ST_ROCK_FALL">3</constant>
+    <constant name="ST_CTHULU_WAIT">1</constant>
+    <constant name="ST_CTHULU_WARNING">2</constant>
+    <constant name="ST_CTHULU_TENTACLES">3</constant>
   </constants>
   <help>
     <rtf>help.rtf</rtf>

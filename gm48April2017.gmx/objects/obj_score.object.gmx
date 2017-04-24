@@ -115,12 +115,14 @@ draw_text(xx, yy, "THIRST");
 var tpc = (thirst / 100) * 100;
 draw_healthbar(xx,yy,xx+128,yy-8,tpc,c_blue,c_blue,c_blue,0,0,0);
 
-/**
+
 if(debug_mode){
 xx += 256;
-    draw_text(xx, yy, instance_count);
+    if(instance_exists(obj_player)){
+    draw_text(xx, yy, obj_player.x);
+    }
 } 
-**/
+
 
 
 </string>

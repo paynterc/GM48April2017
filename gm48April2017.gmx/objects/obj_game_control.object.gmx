@@ -30,6 +30,15 @@ global.bound_pr = room_width;// Player boundries
 global.bound_pl = 0;
 global.bound_pt = 0;
 global.bound_pb = room_height;
+global.scale = 32;//Scale of individual diggable unit
+global.grav=1;
+
+global.room_xunits = room_width/global.scale;
+global.room_yunits = 20;
+global.border_l = 0;
+global.border_r = room_width;
+global.ymin = global.scale*5;// y coord. the topmost level of diggables;
+global.ymax = global.ymin + ((global.room_yunits * global.scale) * 3);// the bottomost level of diggables;
 
 screenshoti=0;
 </string>

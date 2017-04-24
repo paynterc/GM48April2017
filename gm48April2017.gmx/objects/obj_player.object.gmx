@@ -28,8 +28,8 @@
             <string>/// Init
 state="still";
 climbing=false;
-movespeed = 16;
-movespeed_v = 16;
+movespeed = 8;
+movespeed_v = 8;
 jumpspeed = 16;
 grav = global.grav;
 hsp=0;
@@ -52,7 +52,7 @@ alarm[0]=room_speed * digrate;
 hunger=100;
 thirst=100;
 hunger_rate = 1;
-thirst_rate = .25;
+thirst_rate = .50;
 
 alarm[1]=room_speed * hunger_rate;
 alarm[2]=room_speed * thirst_rate;
@@ -328,6 +328,35 @@ if(place_meeting(x,y,obj_enemy_deadly))
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="obj_pickup">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>scr_play_sound(snd_effect_good2,0,0);
+with(other){
+    if(script!=noone){
+        scr_script_parse(script);
+    }
+    instance_destroy();
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="obj_water">
       <action>
         <libid>1</libid>
@@ -346,10 +375,10 @@ if(place_meeting(x,y,obj_enemy_deadly))
           <argument>
             <kind>1</kind>
             <string>/// Drink
-scr_player_set_thirst(5);
+scr_player_set_thirst(20);
 
 global.gamescore ++;
-audio_play_sound(snd_effect_good1,2,0);
+scr_play_sound(snd_effect_good2,0,0);
 with(other){
     instance_destroy();
 }
@@ -376,12 +405,12 @@ with(other){
           <argument>
             <kind>1</kind>
             <string>/// Eat
-hunger+=5;
+hunger+=10;
 if(hunger&gt;100){
     hunger=100;
 }
 global.gamescore ++;
-audio_play_sound(snd_effect_good1,2,0);
+scr_play_sound(snd_effect_good2,0,0);
 with(other){
     instance_destroy();
 }
@@ -407,7 +436,7 @@ with(other){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>audio_play_sound(snd_effect_good2,2,0);
+            <string>scr_play_sound(snd_effect_good2,0,0);
 with(other){
     scr_lunchbox_explode();
 }
@@ -433,7 +462,7 @@ with(other){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>scr_player_set_thirst(5);
+            <string>scr_player_set_thirst(10);
 audio_play_sound(snd_effect_good1,2,0);
 with(other){
     instance_destroy();

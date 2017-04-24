@@ -43,6 +43,9 @@
 if(state=ST_ENEMY_MOVE){
     if(place_meeting(x,y,obj_player))
     {
+        
+        scr_player_death();
+        /***
         if (obj_player.y&lt;y- (sprite_height/2) )
         {
             with(obj_player) vsp = -jumpspeed;
@@ -52,6 +55,7 @@ if(state=ST_ENEMY_MOVE){
         {
             scr_player_death();
         }
+        ***/
     }
 }
 </string>
@@ -80,7 +84,7 @@ if(state==ST_ENEMY_DEAD){
     var prize = instance_create(x,y,obj_spawn_delay);
     prize.obj=obj_food;
     prize.delay=2;
-    audio_play_sound(snd_effect_hit1,2,0);
+    scr_play_sound(snd_effect_hit1,0,0);
     instance_destroy();
     global.gamescore+=4;
 }

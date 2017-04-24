@@ -132,6 +132,9 @@ state=ST_DRILLMAN_DRILL;//Drill state
 if(instance_exists(mydrill)){
     mydrill.drilldepth = global.ymin + (irandom(60) * global.scale);
     mydrill.state = ST_DRILL_DRILLING;
+    with(mydrill){
+        alarm[2]=room_speed * maxdrilltime;
+    }
 }else{
     instance_destroy();
 }

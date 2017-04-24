@@ -1,7 +1,7 @@
 /// Place a gator in the ground
 
 // Where
-xx = irandom_range(0,global.room_xunits - 12) * global.scale;
+xx = argument[0] * global.scale;
 yy = global.ymax-global.scale * 4;
 
 //Dig a hole

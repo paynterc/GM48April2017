@@ -1,0 +1,3 @@
+
+global.gamescore+=300;
+

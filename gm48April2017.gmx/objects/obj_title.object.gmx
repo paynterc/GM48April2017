@@ -91,7 +91,7 @@ scale=15;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite_ext( spr_rat, 0, room_width/2, room_height/2 + 128, scale, scale, 0, c_white, 150 );
+            <string>draw_sprite_ext( spr_rat, 0, room_width/4, room_height/2 + 128, scale, scale, 0, c_black, 150 );
 </string>
           </argument>
         </arguments>

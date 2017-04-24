@@ -41,6 +41,8 @@
             <kind>1</kind>
             <string>/// Init
 vsp = 0;
+depth=1000;
+image_speed = .10;
 </string>
           </argument>
         </arguments>

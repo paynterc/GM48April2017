@@ -12,14 +12,19 @@ diggable=noone;
 
 if(dig_h != 0){
     diggable = instance_place(x+dig_h,y,obj_diggable);
-
 }else if(dig_v != 0){
-    diggable = instance_place(x,y+dig_v,obj_diggable);    
+    diggable = instance_place(x,y+dig_v,obj_diggable);
+        
 }
 
 
 if(diggable!=noone){
     state="digging";
+    if(dig_h != 0){
+        y = ( floor(y/32) * 32) + 16;
+    }else if(dig_v!=0){
+        x = ( floor(x/32) * 32) + 16;
+    }   
 }else{
     state="still";
 }

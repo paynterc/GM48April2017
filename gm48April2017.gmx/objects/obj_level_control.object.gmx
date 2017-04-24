@@ -60,15 +60,14 @@ room_ysquare_start
 **********/
 randomize();
 
-drop_scaf_rate = 30;
+drop_scaf_rate = 20;
 
 
-global.scale = 32;//Scale of individual diggable unit
 trigger_height = global.scale*10;
 
 global.room_xunits = room_width/global.scale;
 global.room_yunits = 20;
-global.grav=1;
+
 global.border_l = 0;
 global.border_r = room_width;
 global.ymin = global.scale*5;// y coord. the topmost level of diggables;
@@ -78,6 +77,8 @@ global.ytrigger = global.ymax - trigger_height;//Triggers more diggables if play
 global.gamescore = 0;
 global.allow_lava = 0;
 global.drops=0;//number of scaffold drops
+
+
 
 
 </string>
@@ -127,7 +128,7 @@ var tbl = instance_create(room_width/2,global.ymin - 160,obj_lab_table);
 instance_create(tbl.x,tbl.y,obj_player);
 instance_create(tbl.x,tbl.y,obj_view_follow);
 
-
+//scr_place_croc_gem_big();
 </string>
           </argument>
         </arguments>
@@ -224,7 +225,7 @@ global.ytrigger = global.ymax - trigger_height;
 
 scr_screen_shake();
 
-scr_place_croc();
+
 
 global.drops++;
            
@@ -374,7 +375,7 @@ if(instance_exists(obj_player)){
     }
     
     if(obj_player.hunger &lt; 1 || obj_player.thirst &lt; 1){   
-        var txt_obj = instance_create(obj_player.x,obj_player.y-64,obj_text_basic);
+        var txt_obj = instance_create(obj_player.x,obj_player.y-64,obj_text_view);
         txt_obj.text = txt;
         scr_player_death();
     }

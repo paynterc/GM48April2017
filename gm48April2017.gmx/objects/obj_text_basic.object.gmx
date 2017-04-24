@@ -60,6 +60,8 @@ depth=-100000;
           <argument>
             <kind>1</kind>
             <string>/// Draw text
+
+
 if(show){
     draw_set_font(fnt);
     draw_set_color(clr);

@@ -8,6 +8,44 @@
   <parentName>obj_enemy_wander</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>604</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_inherited</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Init override
+dead_called = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="0">
       <action>
         <libid>1</libid>
@@ -26,6 +64,12 @@
           <argument>
             <kind>1</kind>
             <string>/// Destroy
+
+var prize = instance_create(x,y,obj_spawn_delay);
+prize.obj=obj_food;
+prize.delay=2;
+audio_play_sound(snd_effect_hit1,2,0);
+    
 instance_destroy();
 </string>
           </argument>
@@ -94,6 +138,11 @@ if(state=ST_ENEMY_MOVE){
 if(state=ST_ENEMY_DEAD){
     image_yscale = -1;
     image_speed = .85;
+    if(!dead_called){
+        dead_called = true;
+        alarm[0]=room_speed * 2;
+        audio_play_sound(snd_effect_hit1,2,0);
+    }
 }
 </string>
           </argument>
@@ -121,30 +170,6 @@ if(state=ST_ENEMY_DEAD){
 with(other){
     state=ST_ENEMY_DEAD;
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="10">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>state = ST_ENEMY_DEAD;
-alarm[0]=room_speed * 3;
 </string>
           </argument>
         </arguments>

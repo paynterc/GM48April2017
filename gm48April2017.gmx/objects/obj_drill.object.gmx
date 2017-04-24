@@ -47,11 +47,38 @@ mydrillman = noone;
 
 digrate = .05;
 alarm[0]=room_speed * digrate;
+maxdrilltime = 10;
 
 
 flash = false;
 flash_rate = .25;
 alarm[1]= room_speed * flash_rate;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Return drill if max time exceeded
+if(state == ST_DRILL_DRILLING){
+    state = ST_DRILL_RETURNING;
+}
 </string>
           </argument>
         </arguments>
